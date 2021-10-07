@@ -18,7 +18,6 @@ package controllers
 
 import (
 	"context"
-
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -47,10 +46,16 @@ type MemcachedReconciler struct {
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.9.2/pkg/reconcile
 func (r *MemcachedReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-	_ = log.FromContext(ctx)
-
-	// your logic here
-
+	l := log.FromContext(ctx)
+	l.Info("修改的crd: %s", req.String())
+	var obj cachev1alpha1.Memcached
+	err := r.Client.Get(context.Background(), client.ObjectKey{
+		Namespace: req.Namespace,
+		Name:      req.Name,
+	}, &obj)
+	if err != nil {
+		l.Error(err, " r.Client.Get获取失败")
+	}
 	return ctrl.Result{}, nil
 }
 

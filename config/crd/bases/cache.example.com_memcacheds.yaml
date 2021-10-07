@@ -41,8 +41,6 @@ spec:
                   to remove/update
                 type: string
               zcx:
-                description: Zcx is an example field of Memcached. Edit memcached_types.go
-                  to remove/update
                 type: string
             type: object
           status:

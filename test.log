@@ -1,0 +1,1 @@
+kubectl logs memcached-operator-controller-manager-7664594978-zgjmm --tail=20 -f  --all-containers=true -n memcached-operator-system
